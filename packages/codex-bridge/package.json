@@ -1,0 +1,44 @@
+{
+  "name": "codex-bridge",
+  "display_name": { "zh": "Codex CLI 桥接", "en": "Codex CLI Bridge" },
+  "description": { "zh": "在 Android 设备上启动 Codex CLI（openai/codex）exec-server，通过 WebSocket 代理提供 AI 编码能力。需要事先安装 Codex 二进制和 Linux rootfs。", "en": "Start Codex CLI exec-server on Android devices via proot, and proxy AI coding capabilities through WebSocket." },
+  "category": "Development",
+  "tools": [
+    {
+      "name": "codex_status",
+      "description": { "zh": "检查 Codex exec-server 运行状态（端口、进程等）", "en": "Check Codex exec-server status" },
+      "parameters": []
+    },
+    {
+      "name": "codex_start",
+      "description": { "zh": "启动 Codex exec-server。自动检测 Shizuku→Root→直接执行。", "en": "Start Codex exec-server with auto-detection of Shizuku/Root/Direct." },
+      "parameters": [
+        { "name": "port", "description": "WebSocket 端口（默认 9877）", "type": "integer", "required": false },
+        { "name": "data_dir", "description": "rootfs 和 codex 数据目录（默认 /sdcard/codex-data）", "type": "string", "required": false }
+      ]
+    },
+    {
+      "name": "codex_stop",
+      "description": { "zh": "停止 Codex exec-server", "en": "Stop Codex exec-server" },
+      "parameters": []
+    },
+    {
+      "name": "codex_execute",
+      "description": { "zh": "通过 WebSocket 向 Codex exec-server 发送 prompt 并获取响应。当需要 Codex AI 协助编码或解决问题时调用。", "en": "Send prompt to Codex exec-server via WebSocket and get the response." },
+      "parameters": [
+        { "name": "prompt", "description": "发送给 Codex 的 prompt 文本", "type": "string", "required": true },
+        { "name": "stream", "description": "是否流式输出（默认 true）", "type": "boolean", "required": false },
+        { "name": "timeout_ms", "description": "超时毫秒（默认 60000）", "type": "integer", "required": false }
+      ]
+    },
+    {
+      "name": "codex_install",
+      "description": { "zh": "下载并安装 Codex CLI 二进制到指定 rootfs。", "en": "Download and install Codex CLI binary into rootfs." },
+      "parameters": [
+        { "name": "version", "description": "Codex 版本号（默认从 GitHub Releases 获取最新）", "type": "string", "required": false },
+        { "name": "data_dir", "description": "rootfs 和 codex 数据目录（默认 /sdcard/codex-data）", "type": "string", "required": false },
+        { "name": "force", "description": "强制重新下载覆盖（默认 false）", "type": "boolean", "required": false }
+      ]
+    }
+  ]
+}
